@@ -1,0 +1,17 @@
+%container-base{
+    padding: 0px $gutter-outside;
+    margin: 0px auto;
+    max-width: 100%;
+}
+.container{
+    @extend %container-base;
+    @include Medium{
+        max-width: map-get($grid-breakpoints, md);
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+}
+.container-fluid{
+    width: 100%;
+}

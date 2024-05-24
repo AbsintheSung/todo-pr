@@ -1,0 +1,17 @@
+@use "sass:math";
+
+$grid-breakpoints: (
+  ssm: 375px,
+  sm: 576px,
+  md: 797px,//767+30
+);
+$gutter-width : 30px;
+$gutter-outside : math.div($gutter-width, 2);
+
+$primary-color:#FFD370;
+$secondary-color:#000000;
+$third-color:#FFFFFF;
+$warn-color:#D87355;
+
+
+

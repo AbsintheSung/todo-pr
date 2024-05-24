@@ -1,0 +1,20 @@
+@mixin SSmall{
+    @media (min-width: map-get($grid-breakpoints, ssm)){
+      @content
+    }
+}
+  
+@mixin Small{
+    @media (min-width: map-get($grid-breakpoints, sm)){
+        @content;
+    }
+}
+@mixin Medium{
+    @media (min-width: map-get($grid-breakpoints, md) ){
+        @content;
+    }
+}
+
+.primary-bg{
+    background-color: $primary-color;
+}
