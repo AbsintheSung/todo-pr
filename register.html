@@ -2,8 +2,54 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>註冊</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container-fluid primary-bg">
+      <div class="container register-view">
+        <header class="register-header">
+          <h1 class="register-title">
+            <div class="title-style"></div>
+            ONLINE TODO LIST
+          </h1>
+          <div class="register-img">
+            <img alt="登入大圖" src="/imgs/login_img.png" />
+          </div>
+        </header>
+        <main class="register-main">
+          <h2 class="register-form-title">註冊帳號</h2>
+          <form class="register-form">
+            <div class="input-style">
+              <label for="Input-email">Email</label>
+              <input id="Input-email" />
+              <p class="register-warn">我是警告標語</p>
+            </div>
+            <div class="input-style">
+              <label for="Input-nickname">您的暱稱</label>
+              <input id="Input-nickname" />
+              <p class="register-warn">我是警告標語</p>
+            </div>
+            <div class="input-style">
+              <label for="Input-password">Password</label>
+              <input id="Input-password" />
+              <p class="register-warn">我是警告標語</p>
+            </div>
+            <div class="input-style">
+              <label for="Input-password-re">再次輸入密碼</label>
+              <input id="Input-password-re" />
+              <p class="register-warn">我是警告標語</p>
+            </div>
+            <div class="register-button">
+              <button>註冊</button>
+              <a class="register_link" href="#">登入</a>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/js/style.js"></script>
+    <script type="module" src="/js/main.js"></script>
+  </body>
 </html>
