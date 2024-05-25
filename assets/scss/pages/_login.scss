@@ -1,57 +1,69 @@
-.login-view{
-    height:100vh;
-    @include Medium{
+.login-view {
+    height: 100vh;
+
+    @include Medium {
         display: flex;
         justify-content: space-between;
     }
 }
 
 //header
-.login-header{
+.login-header {
     padding: 48px 0px;
-    >.login-title{
+
+    >.login-title {
         font-size: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap:0px 4px
+        gap: 0px 4px
     }
-    >.login-subtitle{
+
+    >.login-subtitle {
         font-size: 20px;
         margin-top: 16px;
     }
-    >.login-title,.login-subtitle{
+
+    >.login-title,
+    .login-subtitle {
         text-align: center;
         font-weight: 700;
     }
-    >.login-img{
+
+    >.login-img {
         display: none;
     }
-    @include Medium{
+
+    @include Medium {
         width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
-        >.login-title{
+        align-items: center;
+
+        >.login-title {
             margin-bottom: 16px;
         }
-        >.login-subtitle{
+
+        >.login-subtitle {
             display: none;
         }
-        >.login-img{
+
+        >.login-img {
             display: block;
         }
     }
 }
-.title-style{
+
+.title-style {
     position: relative;
     width: 40px;
     height: 40px;
     border: 3px solid $secondary-color;
     transform: rotate(-10deg);
 }
-.title-style::before{
+
+.title-style::before {
     content: "✔";
     position: absolute;
     font-size: 50px;
@@ -60,10 +72,11 @@
 }
 
 //main
-.login-main{
-    >.form-title{
+.login-main {
+    >.form-title {
         display: none;
-        @include Medium{
+
+        @include Medium {
             display: block;
             font-family: "Noto Sans TC", sans-serif;
             font-size: 24px;
@@ -71,58 +84,66 @@
             margin-bottom: 24px;
         }
     }
-    >.login-form{
-        @include Medium{
+
+    >.login-form {
+        @include Medium {
             width: 100%;
-        } 
+        }
     }
-    @include Medium{
+
+    @include Medium {
         width: 40%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
-    }  
+        align-items: center;
+    }
 }
-.input-style{
+
+.input-style {
     display: flex;
     flex-direction: column;
-    gap:4px 0px;
+    gap: 4px 0px;
     margin-bottom: 16px;
     font-family: "Noto Sans TC", sans-serif;
     font-size: 14px;
     font-weight: 700;
-    >input{
+
+    >input {
         padding: 16px;
         font-size: 16px;
         border: none;
         border-radius: 10px;
     }
-    .login-warn{
-        color:$warn-color;
+
+    .login-warn {
+        color: $warn-color;
     }
 }
 
-.login-button{
+.login-button {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-family: "Noto Sans TC", sans-serif;
     font-weight: 700;
-    >button{
+
+    >.login-btn {
         width: 128px;
         padding: 12px 0px;
         border-radius: 10px;
-        color:$third-color;
+        color: $third-color;
         background-color: $secondary-color;
     }
-    >.login_link{
+
+    >.login_link {
         display: block;
         margin-top: 24px;
-        color:$secondary-color ;
+        color: $secondary-color ;
     }
-    >.login_link:hover{
+
+    >.login_link:hover {
         text-decoration: underline;
     }
 }
