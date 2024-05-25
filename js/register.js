@@ -1,0 +1,5 @@
+const registerEmail = document.querySelector(".register-email")
+const registerName = document.querySelector(".register-name")
+const registerPassword = document.querySelector(".register-password")
+const confirmationPassword = document.querySelector(".confirmation-password")
+const registerBtn = document.querySelector(".register-btn")
