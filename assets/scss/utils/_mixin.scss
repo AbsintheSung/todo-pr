@@ -26,3 +26,12 @@
 .primary-bg {
     background-color: $primary-color;
 }
+
+.home-primary-bg {
+    background-color: $primary-color;
+
+    @include Medium {
+        background-image: linear-gradient(170deg, #FFD370 60%, white 40%);
+    }
+
+}
