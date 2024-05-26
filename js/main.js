@@ -4,6 +4,7 @@ const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*
 const fragment = document.createDocumentFragment()
 const todoList = document.querySelector('.todo-list')
 const todoListVIew = [] //顯示層
+const todoData = []
 const data = {
     "todos": [
         {
@@ -90,6 +91,24 @@ function createElementLi(obj) {
     return li
 }
 
+
+
+async function getData() {
+    try {
+        const url = `https://todoo.5xcamp.us/todos`
+        const headers = {
+            headers: {
+                'Authorization': `${token}`,
+            }
+        }
+        const response = await axios.get(url, headers)
+        response.data.todos.forEach(item => todoData.push(item))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 data.todos.forEach((item) => {
     let li = createElementLi(item)
     todoListVIew.push(li)
@@ -107,7 +126,6 @@ function mountLiDom() {
             completedSpan.style.display = 'none';
             notCompletedSpan.style.display = 'inline-block';
         }
-
         fragment.appendChild(item);
     })
     todoList.appendChild(fragment)
