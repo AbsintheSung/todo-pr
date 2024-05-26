@@ -88,3 +88,50 @@ function createElementLi(obj) {
     li.appendChild(fragment)
     return li
 }
+
+data.todos.forEach((item) => {
+    let li = createElementLi(item)
+    todoListVIew.push(li)
+})
+
+function mountLiDom() {
+    todoListVIew.forEach((item) => {
+        const completedSpan = item.querySelector('.is-check');
+        const notCompletedSpan = item.querySelector('.not-check');
+
+        if (item.getAttribute('time-completed') !== 'null') {
+            completedSpan.style.display = 'inline-block';
+            notCompletedSpan.style.display = 'none';
+        } else {
+            completedSpan.style.display = 'none';
+            notCompletedSpan.style.display = 'inline-block';
+        }
+
+        fragment.appendChild(item);
+    })
+    todoList.appendChild(fragment)
+}
+
+todoListVIew.forEach((item) => {
+    const btn = item.querySelector('.list-completed');
+    const text = item.querySelector('.list-text');
+    const delBtn = item.querySelector('.delete-item');
+
+    btn.addEventListener('click', () => {
+        const id = item.getAttribute('data-id');
+        console.log('Completed button clicked, id:', id);
+    });
+
+    text.addEventListener('click', () => {
+        const id = item.getAttribute('data-id');
+        console.log('Text clicked, id:', id);
+    });
+
+    delBtn.addEventListener('click', () => {
+        const id = item.getAttribute('data-id');
+        console.log('Delete button clicked, id:', id);
+    });
+})
+
+
+mountLiDom()
