@@ -35,3 +35,14 @@ function createElementSpan(className, i_className) {
     return span
 }
 
+//建立button
+function createElementBtn() {
+    const btn = document.createElement('button')
+    const nocheck_span = createElementSpan("not-check", "fa-regular fa-square")
+    const ischeck_span2 = createElementSpan("is-check", "fa-sharp fa-solid fa-check")
+    btn.classList.add('list-completed')
+    // btn.setAttribute('time-completed', completed_at);  // 將completed_at 設為自定義屬性 
+    btn.appendChild(nocheck_span)
+    btn.appendChild(ischeck_span2)
+    return btn
+}
