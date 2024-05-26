@@ -1,0 +1,227 @@
+.home-view {
+    height: 100vh;
+}
+
+.home-header {
+    padding: 16px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include Medium {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    @include Large {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    >.home-title {
+        font-size: 24px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0px 4px;
+
+        .home-title-style {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border: 3px solid $secondary-color;
+            transform: rotate(-10deg);
+        }
+
+        .home-title-style::before {
+            content: "✔";
+            position: absolute;
+            font-size: 50px;
+            left: 5px;
+            top: -20px;
+        }
+    }
+}
+
+.navlist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Noto Sans TC", sans-serif;
+
+    @include Medium {
+        font-size: 16px;
+        gap: 0px 24px;
+    }
+
+    .nav-user {
+        display: none;
+
+        @include Medium {
+            display: block;
+            font-weight: 700;
+        }
+    }
+
+    .nav-signout {
+        >a {
+            display: block;
+            font-size: 14px;
+
+            @include Medium {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+//main區塊
+.home-main {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-family: "Noto Sans TC", sans-serif;
+
+    @include Medium {
+        margin: 0px auto;
+        width: 65%;
+    }
+
+    .main-input {
+        position: relative;
+
+        >input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+        }
+
+        >input:focus {
+            outline: none;
+        }
+
+        >.add-listItem {
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background-color: transparent;
+            font-size: 40px;
+        }
+
+        >.add-listItem:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+.filter-button {
+    display: flex;
+    margin-top: 16px;
+
+    >button {
+        flex: 1;
+        border: none;
+        padding: 16px 0px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #9F9A91;
+        border-bottom: 2px solid #EFEFEF;
+        background-color: #FFFFFF;
+    }
+
+    >button:first-child {
+        border-radius: 10px 0px 0px 0px;
+    }
+
+    >button:last-child {
+        border-radius: 0px 10px 0px 0px;
+    }
+
+    button:hover {
+        cursor: pointer;
+        border-color: black;
+        color: black;
+    }
+}
+
+
+.todo-list {
+    padding: 16px;
+    background-color: #FFFFFF;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0px;
+
+        border-bottom: 2px solid #EFEFEF;
+
+        @include Medium {
+            border: none;
+            padding-bottom: 0px;
+        }
+
+        >.list-header {
+            padding-right: 16px;
+
+            >button {
+                border: none;
+                background-color: #FFFFFF;
+                font-size: 20px;
+            }
+
+            >button:hover {
+                cursor: pointer;
+            }
+
+            >.is-check {
+                color: #FFD370;
+            }
+
+            @include Medium {
+                padding-bottom: 16px;
+                border-bottom: 2px solid #EFEFEF;
+            }
+        }
+
+        >.list-body {
+            margin-right: auto;
+            flex: 1;
+
+            @include Medium {
+                padding-bottom: 16px;
+                border-bottom: 2px solid #EFEFEF;
+            }
+        }
+
+        >.list-footer {
+            >button {
+                border: none;
+                background-color: #FFFFFF;
+                font-size: 20px;
+            }
+
+            >button:hover {
+                cursor: pointer;
+            }
+
+            @include Medium {
+                padding-bottom: 16px;
+            }
+        }
+    }
+}
+
+.main-footer {
+    padding: 16px;
+    background-color: #FFFFFF;
+    border-radius: 0px 0px 10px 10px;
+}
