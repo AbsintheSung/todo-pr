@@ -106,7 +106,7 @@ function setComplete(dom) {
 
 
 
-async function getData() {
+async function getData(dataArray) {
     try {
         const url = `https://todoo.5xcamp.us/todos`
         const headers = {
@@ -115,19 +115,20 @@ async function getData() {
             }
         }
         const response = await axios.get(url, headers)
-        response.data.todos.forEach(item => todoData.push(item))
+        response.data.todos.forEach(item => dataArray.push(item))
     } catch (error) {
         console.log(error)
     }
 }
 
 
-data.todos.forEach((item) => {
-    let li = createElementLi(item)
-    todoListVIew.push(li)
-})
+
 
 function mountLiDom() {
+    todoData.forEach((item) => {
+        let li = createElementLi(item)
+        todoListVIew.push(li)
+    })
     todoListVIew.forEach((item) => {
         setComplete(item)
         fragment.appendChild(item);
@@ -156,5 +157,5 @@ todoListVIew.forEach((item) => {
     });
 })
 
-
+await getData(todoData)
 mountLiDom()
