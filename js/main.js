@@ -46,3 +46,11 @@ function createElementBtn() {
     btn.appendChild(ischeck_span2)
     return btn
 }
+
+//建立p標籤 ( list 文字內容)
+function createElementContent(content = "") {
+    const text = document.createElement('p')
+    text.classList.add('list-text')
+    text.textContent = content
+    return text
+}
