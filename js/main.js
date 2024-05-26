@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const todoList = document.querySelector('.todo-list')
 const todoListVIew = [] //顯示層
