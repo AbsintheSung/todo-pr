@@ -54,3 +54,14 @@ function createElementContent(content = "") {
     text.textContent = content
     return text
 }
+
+//建立一個div(list-content) 將上述組合起來
+function createElementListContent(content) {
+    const div = document.createElement('div')
+    const btn = createElementBtn()
+    const text = createElementContent(content)
+    div.classList.add('list-content')
+    div.appendChild(btn)
+    div.appendChild(text)
+    return div
+}
