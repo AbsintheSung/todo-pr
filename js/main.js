@@ -125,7 +125,7 @@ async function handleComplete(id) {
         const url = `https://todoo.5xcamp.us/todos/${id}/toggle`
         const headers = {
             headers: {
-                'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Nzc3Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzE2Njk4Mzc4LCJleHAiOjE3MTc5OTQzNzgsImp0aSI6ImExZjU1Y2NhLTg1M2UtNDA1YS05OTM1LWY5MjZhYzM4ZWFmYyJ9.2Q-AqUBsKgK2M8H1GgGP76lvCeyW2s96hFWIiLvXgvo `
+                'Authorization': `${token}`
             }
         }
         const response = await axios.patch(url, {}, headers)
@@ -136,9 +136,6 @@ async function handleComplete(id) {
         console.log(error)
     }
 }
-
-
-
 
 function mountLiDom() {
     todoData.forEach((item) => {
@@ -152,14 +149,21 @@ function mountLiDom() {
     todoList.appendChild(fragment)
 }
 
+
+
+
+await getData(todoData)
+mountLiDom()
 todoListVIew.forEach((item) => {
-    const btn = item.querySelector('.list-completed');
+    const stateBtn = item.querySelector('.list-completed');
     const text = item.querySelector('.list-text');
     const delBtn = item.querySelector('.delete-item');
 
-    btn.addEventListener('click', () => {
+    stateBtn.addEventListener('click', async () => {
         const id = item.getAttribute('data-id');
-        console.log('Completed button clicked, id:', id);
+        const completed_at = await handleComplete(id)
+        item.setAttribute('time-completed', completed_at);
+        setComplete(item)
     });
 
     text.addEventListener('click', () => {
@@ -172,6 +176,3 @@ todoListVIew.forEach((item) => {
         console.log('Delete button clicked, id:', id);
     });
 })
-
-await getData(todoData)
-mountLiDom()
