@@ -91,6 +91,19 @@ function createElementLi(obj) {
     return li
 }
 
+function setComplete(dom) {
+    const completedSpan = dom.querySelector('.is-check');
+    const notCompletedSpan = dom.querySelector('.not-check');
+
+    if (dom.getAttribute('time-completed') !== 'null') {
+        completedSpan.style.display = 'inline-block';
+        notCompletedSpan.style.display = 'none';
+    } else {
+        completedSpan.style.display = 'none';
+        notCompletedSpan.style.display = 'inline-block';
+    }
+}
+
 
 
 async function getData() {
@@ -116,16 +129,7 @@ data.todos.forEach((item) => {
 
 function mountLiDom() {
     todoListVIew.forEach((item) => {
-        const completedSpan = item.querySelector('.is-check');
-        const notCompletedSpan = item.querySelector('.not-check');
-
-        if (item.getAttribute('time-completed') !== 'null') {
-            completedSpan.style.display = 'inline-block';
-            notCompletedSpan.style.display = 'none';
-        } else {
-            completedSpan.style.display = 'none';
-            notCompletedSpan.style.display = 'inline-block';
-        }
+        setComplete(item)
         fragment.appendChild(item);
     })
     todoList.appendChild(fragment)
