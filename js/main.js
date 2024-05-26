@@ -1,8 +1,10 @@
 import axios from 'axios'
 
+const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const todoList = document.querySelector('.todo-list')
 const todoListVIew = [] //顯示層
+const todoData = []
 const data = {
     "todos": [
         {
@@ -89,24 +91,46 @@ function createElementLi(obj) {
     return li
 }
 
-data.todos.forEach((item) => {
-    let li = createElementLi(item)
-    todoListVIew.push(li)
-})
+function setComplete(dom) {
+    const completedSpan = dom.querySelector('.is-check');
+    const notCompletedSpan = dom.querySelector('.not-check');
+
+    if (dom.getAttribute('time-completed') !== 'null') {
+        completedSpan.style.display = 'inline-block';
+        notCompletedSpan.style.display = 'none';
+    } else {
+        completedSpan.style.display = 'none';
+        notCompletedSpan.style.display = 'inline-block';
+    }
+}
+
+
+
+async function getData(dataArray) {
+    try {
+        const url = `https://todoo.5xcamp.us/todos`
+        const headers = {
+            headers: {
+                'Authorization': `${token}`,
+            }
+        }
+        const response = await axios.get(url, headers)
+        response.data.todos.forEach(item => dataArray.push(item))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
 
 function mountLiDom() {
+    todoData.forEach((item) => {
+        let li = createElementLi(item)
+        todoListVIew.push(li)
+    })
     todoListVIew.forEach((item) => {
-        const completedSpan = item.querySelector('.is-check');
-        const notCompletedSpan = item.querySelector('.not-check');
-
-        if (item.getAttribute('time-completed') !== 'null') {
-            completedSpan.style.display = 'inline-block';
-            notCompletedSpan.style.display = 'none';
-        } else {
-            completedSpan.style.display = 'none';
-            notCompletedSpan.style.display = 'inline-block';
-        }
-
+        setComplete(item)
         fragment.appendChild(item);
     })
     todoList.appendChild(fragment)
@@ -133,5 +157,5 @@ todoListVIew.forEach((item) => {
     });
 })
 
-
+await getData(todoData)
 mountLiDom()
