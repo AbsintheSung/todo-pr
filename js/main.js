@@ -65,3 +65,26 @@ function createElementListContent(content) {
     div.appendChild(text)
     return div
 }
+
+//建立刪除btn
+function createElementDelBtn() {
+    const btn = document.createElement('button')
+    const del_i = createElement_i("fa-solid fa-x")
+    btn.classList.add('delete-item')
+    btn.appendChild(del_i)
+    return btn
+}
+
+//建立li
+function createElementLi(obj) {
+    const li = document.createElement('li');
+    const li_content = createElementListContent(obj.content);
+    const del_btn = createElementDelBtn();
+    li.classList.add('todo-list__item')
+    li.setAttribute('data-id', obj.id);  // 將id 設為自定義屬性 
+    li.setAttribute('time-completed', obj.completed_at);  // 將time 設為自定義屬性 
+    fragment.appendChild(li_content)
+    fragment.appendChild(del_btn)
+    li.appendChild(fragment)
+    return li
+}
