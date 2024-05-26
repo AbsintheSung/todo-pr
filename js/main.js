@@ -120,6 +120,22 @@ async function getData(dataArray) {
         console.log(error)
     }
 }
+async function handleComplete(id) {
+    try {
+        const url = `https://todoo.5xcamp.us/todos/${id}/toggle`
+        const headers = {
+            headers: {
+                'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Nzc3Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzE2Njk4Mzc4LCJleHAiOjE3MTc5OTQzNzgsImp0aSI6ImExZjU1Y2NhLTg1M2UtNDA1YS05OTM1LWY5MjZhYzM4ZWFmYyJ9.2Q-AqUBsKgK2M8H1GgGP76lvCeyW2s96hFWIiLvXgvo `
+            }
+        }
+        const response = await axios.patch(url, {}, headers)
+        if (response.status === 200) {
+            return response.data.completed_at
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 
