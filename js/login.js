@@ -8,10 +8,10 @@ const fetchUserData = async (userdata) => {
         const response = await axios.post("https://todoo.5xcamp.us/users/sign_in", userdata);
         if (response.status === 200) {
             document.cookie = `TokenCode=${response.headers["authorization"]}`
+            return true
         }
-        console.log(response)
     } catch (error) {
-        console.error(error.response);
+        // console.error(error.response);
     }
 }
 
@@ -32,13 +32,15 @@ const checkToken = async () => {
 
 loginButton.addEventListener("click", async (event) => {
     event.preventDefault();
+    let islogin = false
     const userInput = {
         "user": {
             email: inputEmail.value,
             password: inputPassword.value
         }
     }
-    await fetchUserData(userInput)
+    islogin = await fetchUserData(userInput)
+    islogin ? window.location.href = '/todo-pr/pages/home' : null;
 })
 
 
