@@ -26,3 +26,12 @@ function createElement_i(className) {
     return i
 }
 
+//建立 span 標籤
+function createElementSpan(className, i_className) {
+    const span = document.createElement('span')
+    const i = createElement_i(i_className)
+    span.classList.add(className)
+    span.appendChild(i)
+    return span
+}
+
