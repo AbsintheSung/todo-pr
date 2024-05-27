@@ -90,6 +90,23 @@ function pushDataInView() {
     })
 }
 
+//篩選 time-completed !== null 的 li元素
+function filterIsComplete() {
+    const filterArr = todoListVIew.filter((dom) => {
+        return dom.getAttribute('time-completed') !== 'null';
+    })
+    return filterArr
+}
+
+//篩選 time-completed === null 的 li元素
+function filterNotComplete() {
+    const filterArr = todoListVIew.filter((dom) => {
+        return dom.getAttribute('time-completed') === 'null';
+    })
+    return filterArr
+}
+
+
 
 //遠端取得資料，並存放自本地端 ( todoData )
 async function getData(dataArray) {
