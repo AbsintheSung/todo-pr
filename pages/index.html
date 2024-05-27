@@ -24,12 +24,12 @@
           <form class="login-form">
             <div class="input-style">
               <label for="Input-email">Email</label>
-              <input id="Input-email" class="login-email" />
+              <input id="Input-email" class="login-email" name="loginEmail" />
               <p class="login-warn">我是警告標語</p>
             </div>
             <div class="input-style">
               <label for="Input-password">Password</label>
-              <input type="password" id="Input-password" class="login-password" />
+              <input type="password" id="Input-password" class="login-password" name="loginPassword" />
               <p class="login-warn">我是警告標語</p>
             </div>
             <div class="login-button">
@@ -41,6 +41,7 @@
       </div>
     </div>
     <script type="module" src="/js/style.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script type="module" src="/js/login.js"></script>
   </body>
 </html>

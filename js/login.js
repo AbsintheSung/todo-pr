@@ -1,7 +1,11 @@
 import axios from 'axios'
-const inputEmail = document.querySelector(".login-email")
-const inputPassword = document.querySelector(".login-password")
-const loginButton = document.querySelector(".login-btn")
+const loginForm = document.querySelector('.login-form');
+const inputEmail = document.querySelector(".login-email");
+const inputPassword = document.querySelector(".login-password");
+const loginButton = document.querySelector(".login-btn");
+const loginWarn = document.querySelector('.login-warn')
+const loginWarnView = Array.from(loginWarn)
+
 
 const fetchUserData = async (userdata) => {
     try {
@@ -42,5 +46,6 @@ loginButton.addEventListener("click", async (event) => {
     islogin = await fetchUserData(userInput)
     islogin ? window.location.href = '/todo-pr/pages/home' : null;
 })
+
 
 
