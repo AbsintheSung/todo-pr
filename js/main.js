@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import createElementLi from "./li_module"
+import { handleEdit } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const todoList = document.querySelector('.todo-list')
@@ -103,9 +104,14 @@ todoListVIew.forEach((item) => {
         setComplete(item)
     });
 
-    text.addEventListener('click', () => {
+    text.addEventListener('click', async (event) => {
         const id = item.getAttribute('data-id');
-        console.log('Text clicked, id:', id);
+        const responseValue = await handleEdit(event.target.textContent,id,editApi)
+        if(responseValue !=undefined){
+            const idIndex = todoData.findIndex((item)=>item.id === id)
+            todoData[idIndex].content = responseValue.content
+            event.target.textContent = responseValue.content
+        }
     });
 
     delBtn.addEventListener('click', () => {
