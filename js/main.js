@@ -114,6 +114,17 @@ function listInfoMessage() {
     listInfo.textContent = `${filterList.length} 個待完成`
 }
 
+//重製 篩選按鈕 樣式顯示
+function resetFilterBtnStyle() {
+    filterBtnView.forEach(item => item.style.borderBottom = '2px solid #EFEFEF')
+}
+//初始化 篩選按鈕顯示
+function ininFilterBtn() {
+    const Index = filterBtnView.findIndex((dom) => dom.getAttribute('data-filter') === "全部")
+    filterBtnView[Index].style.borderColor = 'black'
+}
+
+
 
 //遠端取得資料，並存放自本地端 ( todoData )
 async function getData(dataArray) {
@@ -223,14 +234,20 @@ filterBtnView.forEach((item) => {
         const filterId = item.getAttribute('data-filter');
         if (filterId === "全部") {
             resetDom(todoList, todoListVIew)
+            resetFilterBtnStyle()
+            item.style.borderColor = 'black'
         }
         if (filterId === "待完成") {
             const notCompleteArray = filterNotComplete()
             resetDom(todoList, notCompleteArray)
+            resetFilterBtnStyle()
+            item.style.borderColor = 'black'
         }
         if (filterId === "已完成") {
             const isCompleteArray = filterIsComplete()
             resetDom(todoList, isCompleteArray)
+            resetFilterBtnStyle()
+            item.style.borderColor = 'black'
         }
     })
 })
@@ -242,7 +259,7 @@ async function init() {
     await getData(todoData)
     pushDataInView()
     mountLiDom(todoList, todoListVIew)
-    listInfoMessage()
+    ininFilterBtn()
 }
 
 init()
