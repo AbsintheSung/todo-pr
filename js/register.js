@@ -1,5 +1,5 @@
 import axios from "axios"
-import { loading, statusAlert, toast } from "./swal"
+import { loading, errorAlert, toast } from "./swal"
 const registerForm = document.querySelector('.register-form')
 const registerEmail = document.querySelector(".register-email")
 const registerName = document.querySelector(".register-name")
@@ -72,8 +72,8 @@ async function sendData(data) {
         }
     } catch (error) {
         // console.log(error.response.status, error.response.data)
-        const errorMes = error.response.data.message + error.response.data.error[0]
-        statusAlert(errorMes, 'error')
+        const errorMes = error.response.data.message + " " + error.response.data.error[0]
+        errorAlert(errorMes, 'error')
     }
 }
 

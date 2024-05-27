@@ -64,13 +64,13 @@ export async function handleDelete(id, fn) {
       });
       return result.value.data
     }
-    // if (result.isConfirmed) {
-    //   Swal.fire({
-    //     title: "Deleted!",
-    //     text: "Your file has been deleted.",
-    //     icon: "success"
-    //   });
-    // }
+    if (result.value.status === 404) {
+      Swal.fire({
+        title: "刪除失敗",
+        text: `${result.value.data.message}`,
+        icon: "error"
+      });
+    }
   });
 }
 
@@ -91,9 +91,9 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 1000,
 });
-export function toast(iconText, titleText) {
+export function toast(iconIcon, titleText) {
   Toast.fire({
-    icon: iconText,
+    icon: iconIcon,
     title: titleText,
 
   });
@@ -106,5 +106,14 @@ export function statusAlert(statusTitle, statusIcon) {
     icon: `${statusIcon}`,
     timer: 750,
     showConfirmButton: false,
+  });
+}
+
+export function errorAlert(statusTitle, statusIcon) {
+  Swal.fire({
+    title: `${statusTitle}`,
+    icon: `${statusIcon}`,
+    showConfirmButton: true,
+    confirmButtonText: "確定"
   });
 }

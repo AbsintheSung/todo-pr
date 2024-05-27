@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import createElementLi from "./li_module"
-import { handleEdit, handleDelete, loading, statusAlert } from "./swal"
+import { handleEdit, handleDelete, loading, statusAlert, toast } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const userInputList = document.querySelector('.home-userinput')
@@ -108,6 +108,7 @@ async function getData(dataArray) {
 //更改資料狀態( 完成 或是 未完成 )
 async function handleComplete(id) {
     try {
+        loading("更改中")
         const url = `https://todoo.5xcamp.us/todos/${id}/toggle`
         const headers = {
             headers: {
@@ -116,10 +117,12 @@ async function handleComplete(id) {
         }
         const response = await axios.patch(url, {}, headers)
         if (response.status === 200) {
+            toast('success', '更改成功')
             return response.data.completed_at
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
+        toast('error', '更改失敗')
     }
 }
 
@@ -153,7 +156,7 @@ async function deleteApi(id) {
         const response = await axios.delete(url, headers)
         return response
     } catch (error) {
-        console.log(error)
+        return error.response
     }
 }
 
@@ -170,11 +173,11 @@ async function addList(userInput) {
     try {
         const response = await axios.post(url, data, headers)
         if (response.status === 201) {
-            statusAlert('新增成功', 'success')
+            toast('success', '更改成功')
             return response.data
         }
     } catch (error) {
-        statusAlert('新增失敗', 'error')
+        toast('error', '新增失敗')
         console.log(error)
     }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loading, statusAlert, toast } from "./swal"
+import { loading, errorAlert, toast } from "./swal"
 const loginForm = document.querySelector('.login-form');
 const inputEmail = document.querySelector(".login-email");
 const inputPassword = document.querySelector(".login-password");
@@ -19,7 +19,7 @@ const fetchUserData = async (userdata) => {
         }
     } catch (error) {
         console.error(error.response);
-        statusAlert(error.response.data.message, 'error')
+        errorAlert(error.response.data.message, 'error')
     }
 }
 
