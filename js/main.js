@@ -159,7 +159,7 @@ async function deleteApi(id){
 
 
 addListBtn.addEventListener('click',function(){
-    console.log(userInputList.value)
+    
 })
 
 
