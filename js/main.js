@@ -191,6 +191,10 @@ addListBtn.addEventListener('click',async ()=>{
 
 
 //初始化設定
-await getData(todoData)
-pushDataInView()
-mountLiDom()
+async function init(){
+    await getData(todoData)
+    pushDataInView()
+    mountLiDom()
+}
+
+init()
