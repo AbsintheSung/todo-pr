@@ -125,8 +125,16 @@ todoListVIew.forEach((item) => {
         }
     });
 
-    delBtn.addEventListener('click', () => {
+    delBtn.addEventListener('click', async() => {
         const id = item.getAttribute('data-id');
-        console.log('Delete button clicked, id:', id);
+        const responseValue = await handleDelete(id,deleteApi)
+        if(responseValue===undefined){
+            return
+        }else if(responseValue.message==='已刪除'){
+            const idIndex = todoData.findIndex((item)=>item.id === id)
+            todoData.splice(idIndex,1);
+            todoListVIew.splice(idIndex,1);
+            resetDom(todoList)
+        }
     });
 })
