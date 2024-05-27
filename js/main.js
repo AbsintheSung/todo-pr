@@ -4,6 +4,7 @@ import createElementLi from "./li_module"
 import { handleEdit, handleDelete, loading, statusAlert, toast } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
+const userLoginOut = document.querySelector('.login-out')
 const userInputList = document.querySelector('.home-userinput')
 const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
@@ -197,6 +198,22 @@ async function deleteApi(id) {
     }
 }
 
+//發送登出API
+async function loginOut() {
+    loading('新增中')
+    const url = `https://todoo.5xcamp.us/users/sign_out`
+    const headers = { headers: { 'Authorization': `${token}` } }
+    try {
+        const response = await axios.delete(url, headers)
+        if (response.status === 200) {
+            toast('success', '登出成功')
+            window.location.href = '/todo-pr/pages/index'
+        }
+    } catch (error) {
+        // console.log(error)
+    }
+}
+
 //新增list 請求
 async function addList(userInput) {
     const url = `https://todoo.5xcamp.us/todos`
@@ -227,6 +244,9 @@ addListBtn.addEventListener('click', async () => {
     todoListVIew.unshift(li)
     userInputList.value = ''
     resetDom(todoList, todoListVIew)
+})
+userLoginOut.addEventListener('click', async () => {
+    await loginOut()
 })
 
 filterBtnView.forEach((item) => {
