@@ -7,6 +7,8 @@ const fragment = document.createDocumentFragment()
 const userInputList = document.querySelector('.home-userinput')
 const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
+const filterBtn = document.querySelectorAll('.filter-btn')
+const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
 
@@ -191,6 +193,22 @@ addListBtn.addEventListener('click', async () => {
     userInputList.value = ''
     resetDom(todoList)
 })
+
+filterBtnView.forEach((item) => {
+    item.addEventListener('click', () => {
+        const filterId = item.getAttribute('data-filter');
+        if (filterId === "全部") {
+
+        }
+        if (filterId === "待完成") {
+
+        }
+        if (filterId === "已完成") {
+
+        }
+    })
+})
+
 
 
 //初始化設定
