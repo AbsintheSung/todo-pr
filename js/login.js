@@ -23,21 +23,6 @@ const fetchUserData = async (userdata) => {
     }
 }
 
-//測試授權
-const checkToken = async () => {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    try {
-        const response = await axios.get("https://todoo.5xcamp.us/check", {
-            headers: {
-                'Authorization': token
-            }
-        });
-        console.log(response)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 
 const constraints = {
     "email": {
