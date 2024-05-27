@@ -73,3 +73,23 @@ export async function handleDelete(id,fn){
       // }
     });
 }
+
+export async function loading(){
+  Swal.fire({
+    title: "新增中",
+    text: "請稍候...",
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+} 
+
+export function statusAlert(statusTitle,statusIcon){
+  Swal.fire({
+    title: `${statusTitle}`,
+    icon: `${statusIcon}`,
+    timer: 750,
+    showConfirmButton: false,
+  });
+}
