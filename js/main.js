@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import createElementLi from "./li_module"
-import { handleEdit } from "./swal"
+import { handleEdit,handleDelete } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const todoList = document.querySelector('.todo-list')
@@ -75,37 +75,52 @@ async function editApi(id,userInput) {
     }
 }
 
-function mountLiDom() {
+async function deleteApi(id){
+    const url = `https://todoo.5xcamp.us/todos/${id}`
+    const headers = {headers: {'Authorization': `${token}`}}
+    try {
+        const response = await axios.delete(url,headers)
+        return response
+    } catch (error) {
+        console.log(error)
+    }  
+}
+
+function pushDataInView(){
     todoData.forEach((item) => {
         let li = createElementLi(item)
         todoListVIew.push(li)
     })
+}
+
+function mountLiDom() {
     todoListVIew.forEach((item) => {
         setComplete(item)
+        eventListenerConfig(item)
         fragment.appendChild(item);
     })
     todoList.appendChild(fragment)
 }
-
-
-
-
-await getData(todoData)
-mountLiDom()
-todoListVIew.forEach((item) => {
-    const stateBtn = item.querySelector('.list-completed');
-    const text = item.querySelector('.list-text');
-    const delBtn = item.querySelector('.delete-item');
+function resetDom(domfather){
+    while(domfather.firstChild){
+        domfather.removeChild(domfather.firstChild)
+    }
+    mountLiDom()
+}
+function eventListenerConfig(dom){
+    const stateBtn = dom.querySelector('.list-completed');
+    const text = dom.querySelector('.list-text');
+    const delBtn = dom.querySelector('.delete-item');
 
     stateBtn.addEventListener('click', async () => {
-        const id = item.getAttribute('data-id');
+        const id = dom.getAttribute('data-id');
         const completed_at = await handleComplete(id)
-        item.setAttribute('time-completed', completed_at);
-        setComplete(item)
+        dom.setAttribute('time-completed', completed_at);
+        setComplete(dom)
     });
 
     text.addEventListener('click', async (event) => {
-        const id = item.getAttribute('data-id');
+        const id = dom.getAttribute('data-id');
         const responseValue = await handleEdit(event.target.textContent,id,editApi)
         if(responseValue !=undefined){
             const idIndex = todoData.findIndex((item)=>item.id === id)
@@ -114,8 +129,58 @@ todoListVIew.forEach((item) => {
         }
     });
 
-    delBtn.addEventListener('click', () => {
-        const id = item.getAttribute('data-id');
-        console.log('Delete button clicked, id:', id);
+    delBtn.addEventListener('click', async() => {
+        const id = dom.getAttribute('data-id');
+        const responseValue = await handleDelete(id,deleteApi)
+        if(responseValue===undefined){
+            return
+        }else if(responseValue.message==='已刪除'){
+            const idIndex = todoData.findIndex((item)=>item.id === id)
+            todoData.splice(idIndex,1);
+            todoListVIew.splice(idIndex,1);
+            resetDom(todoList)
+        }
     });
+}
+
+
+
+
+await getData(todoData)
+pushDataInView()
+mountLiDom()
+todoListVIew.forEach((item) => {
+    // const stateBtn = item.querySelector('.list-completed');
+    // const text = item.querySelector('.list-text');
+    // const delBtn = item.querySelector('.delete-item');
+
+    // stateBtn.addEventListener('click', async () => {
+    //     const id = item.getAttribute('data-id');
+    //     const completed_at = await handleComplete(id)
+    //     item.setAttribute('time-completed', completed_at);
+    //     setComplete(item)
+    // });
+
+    // text.addEventListener('click', async (event) => {
+    //     const id = item.getAttribute('data-id');
+    //     const responseValue = await handleEdit(event.target.textContent,id,editApi)
+    //     if(responseValue !=undefined){
+    //         const idIndex = todoData.findIndex((item)=>item.id === id)
+    //         todoData[idIndex].content = responseValue.content
+    //         event.target.textContent = responseValue.content
+    //     }
+    // });
+
+    // delBtn.addEventListener('click', async() => {
+    //     const id = item.getAttribute('data-id');
+    //     const responseValue = await handleDelete(id,deleteApi)
+    //     if(responseValue===undefined){
+    //         return
+    //     }else if(responseValue.message==='已刪除'){
+    //         const idIndex = todoData.findIndex((item)=>item.id === id)
+    //         todoData.splice(idIndex,1);
+    //         todoListVIew.splice(idIndex,1);
+    //         resetDom(todoList)
+    //     }
+    // });
 })

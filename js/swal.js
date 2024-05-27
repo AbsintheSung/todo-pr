@@ -36,3 +36,40 @@ export async function handleEdit(inputValue,id,fn){
         }
       });
 }
+
+//刪除提示
+export async function handleDelete(id,fn){
+  return Swal.fire({
+      title: "刪除事項",
+      text: "你確定要刪除此項目嗎?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "確定",
+      cancelButtonText: "取消",
+      preConfirm:  ()=>{
+          return  fn(id)
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if(!result.isConfirmed){
+          return
+      }
+      console.log(result)
+      if (result.value.status===200) {
+          Swal.fire({
+            title: `${result.value.data.message}`,
+            icon: "success"
+          });
+          return result.value.data
+        }
+      // if (result.isConfirmed) {
+      //   Swal.fire({
+      //     title: "Deleted!",
+      //     text: "Your file has been deleted.",
+      //     icon: "success"
+      //   });
+      // }
+    });
+}
