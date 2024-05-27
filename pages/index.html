@@ -24,23 +24,24 @@
           <form class="login-form">
             <div class="input-style">
               <label for="Input-email">Email</label>
-              <input id="Input-email" class="login-email" />
-              <p class="login-warn">我是警告標語</p>
+              <input id="Input-email" class="login-email" name="email" />
+              <p id="emailwarn"  class="login-warn">我是警告標語</p>
             </div>
             <div class="input-style">
               <label for="Input-password">Password</label>
-              <input type="password" id="Input-password" class="login-password" />
-              <p class="login-warn">我是警告標語</p>
+              <input type="password" id="Input-password" class="login-password" name="password" />
+              <p id="passwordwarn" class="login-warn">我是警告標語</p>
             </div>
             <div class="login-button">
               <button class="login-btn">登入</button>
-              <a class="login_link" href="#">註冊帳號</a>
+              <a class="login_link" href="/todo-pr/pages/register">註冊帳號</a>
             </div>
           </form>
         </main>
       </div>
     </div>
     <script type="module" src="/js/style.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script type="module" src="/js/login.js"></script>
   </body>
 </html>

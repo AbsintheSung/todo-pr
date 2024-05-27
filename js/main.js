@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import createElementLi from "./li_module"
-import { handleEdit,handleDelete,loading,statusAlert } from "./swal"
+import { handleEdit, handleDelete, loading, statusAlert } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const userInputList = document.querySelector('.home-userinput')
@@ -34,15 +34,15 @@ function mountLiDom() {
 }
 
 //重製畫面，清空網頁畫面( 移除所有的li dom元素 ) 再透過 todoListVIew 重新渲染(掛載) ，
-function resetDom(domfather){
-    while(domfather.firstChild){
+function resetDom(domfather) {
+    while (domfather.firstChild) {
         domfather.removeChild(domfather.firstChild)
     }
     mountLiDom()
 }
 
 //li-dom元素的所有監聽事件
-function eventListenerConfig(dom){
+function eventListenerConfig(dom) {
     const stateBtn = dom.querySelector('.list-completed');
     const text = dom.querySelector('.list-text');
     const delBtn = dom.querySelector('.delete-item');
@@ -56,23 +56,23 @@ function eventListenerConfig(dom){
 
     text.addEventListener('click', async (event) => {
         const id = dom.getAttribute('data-id');
-        const responseValue = await handleEdit(event.target.textContent,id,editApi)
-        if(responseValue !=undefined){
-            const idIndex = todoData.findIndex((item)=>item.id === id)
+        const responseValue = await handleEdit(event.target.textContent, id, editApi)
+        if (responseValue != undefined) {
+            const idIndex = todoData.findIndex((item) => item.id === id)
             todoData[idIndex].content = responseValue.content
             event.target.textContent = responseValue.content
         }
     });
 
-    delBtn.addEventListener('click', async() => {
+    delBtn.addEventListener('click', async () => {
         const id = dom.getAttribute('data-id');
-        const responseValue = await handleDelete(id,deleteApi)
-        if(responseValue===undefined){
+        const responseValue = await handleDelete(id, deleteApi)
+        if (responseValue === undefined) {
             return
-        }else if(responseValue.message==='已刪除'){
-            const idIndex = todoData.findIndex((item)=>item.id === id)
-            todoData.splice(idIndex,1);
-            todoListVIew.splice(idIndex,1);
+        } else if (responseValue.message === '已刪除') {
+            const idIndex = todoData.findIndex((item) => item.id === id)
+            todoData.splice(idIndex, 1);
+            todoListVIew.splice(idIndex, 1);
             resetDom(todoList)
         }
     });
@@ -80,7 +80,7 @@ function eventListenerConfig(dom){
 
 
 //將資料，透過 createElementLi 轉成 li dom元素
-function pushDataInView(){
+function pushDataInView() {
     todoData.forEach((item) => {
         let li = createElementLi(item)
         eventListenerConfig(li) //對每一個li-dom元素綁定監聽事件
@@ -124,14 +124,14 @@ async function handleComplete(id) {
 }
 
 //發送 編輯請求
-async function editApi(id,userInput) {
+async function editApi(id, userInput) {
     try {
-        const url  =`https://todoo.5xcamp.us/todos/${id}`
+        const url = `https://todoo.5xcamp.us/todos/${id}`
         const data = {
             "todo": {
-              "content": `${userInput}`
+                "content": `${userInput}`
             }
-          }
+        }
         const headers = {
             headers: {
                 'Authorization': `${token}`
@@ -146,52 +146,52 @@ async function editApi(id,userInput) {
 }
 
 //發送刪除請求
-async function deleteApi(id){
+async function deleteApi(id) {
     const url = `https://todoo.5xcamp.us/todos/${id}`
-    const headers = {headers: {'Authorization': `${token}`}}
+    const headers = { headers: { 'Authorization': `${token}` } }
     try {
-        const response = await axios.delete(url,headers)
+        const response = await axios.delete(url, headers)
         return response
     } catch (error) {
         console.log(error)
-    }  
+    }
 }
 
 //新增list 請求
-async function addList(userInput){
+async function addList(userInput) {
     const url = `https://todoo.5xcamp.us/todos`
     const data = {
         "todo": {
             "content": `${userInput}`
         }
     }
-    const headers = {headers: {'Authorization': `${token}`}}
-    loading()
+    const headers = { headers: { 'Authorization': `${token}` } }
+    loading('新增中')
     try {
-        const response = await axios.post(url,data,headers)
-        if(response.status === 201){
-            statusAlert('新增成功','success')
+        const response = await axios.post(url, data, headers)
+        if (response.status === 201) {
+            statusAlert('新增成功', 'success')
             return response.data
         }
     } catch (error) {
-        statusAlert('新增失敗','error')
+        statusAlert('新增失敗', 'error')
         console.log(error)
     }
 }
 
 
-addListBtn.addEventListener('click',async ()=>{
+addListBtn.addEventListener('click', async () => {
     const liData = await addList(userInputList.value)
-    const li = createElementLi({...liData, "completed_at": null})
+    const li = createElementLi({ ...liData, "completed_at": null })
     eventListenerConfig(li) //對每一個li-dom元素綁定監聽事件
     todoListVIew.unshift(li)
-    userInputList.value=''
+    userInputList.value = ''
     resetDom(todoList)
 })
 
 
 //初始化設定
-async function init(){
+async function init() {
     await getData(todoData)
     pushDataInView()
     mountLiDom()
