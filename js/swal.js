@@ -91,9 +91,9 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 1000,
 });
-export function toast(iconText, titleText) {
+export function toast(iconIcon, titleText) {
   Toast.fire({
-    icon: iconText,
+    icon: iconIcon,
     title: titleText,
 
   });
