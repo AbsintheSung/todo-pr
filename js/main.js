@@ -8,6 +8,7 @@ const userInputList = document.querySelector('.home-userinput')
 const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
 const filterBtn = document.querySelectorAll('.filter-btn')
+const listInfo = document.querySelector('.list-info')
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
@@ -54,6 +55,7 @@ function eventListenerConfig(dom) {
         const completed_at = await handleComplete(id)
         dom.setAttribute('time-completed', completed_at);
         setComplete(dom)
+        listInfoMessage()
     });
 
     text.addEventListener('click', async (event) => {
@@ -106,6 +108,11 @@ function filterNotComplete() {
     return filterArr
 }
 
+// 顯示 左下待完成樣式
+function listInfoMessage() {
+    let filterList = filterNotComplete()
+    listInfo.textContent = `${filterList.length} 個待完成`
+}
 
 
 //遠端取得資料，並存放自本地端 ( todoData )
@@ -235,6 +242,7 @@ async function init() {
     await getData(todoData)
     pushDataInView()
     mountLiDom(todoList, todoListVIew)
+    listInfoMessage()
 }
 
 init()
