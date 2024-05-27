@@ -75,6 +75,17 @@ async function editApi(id,userInput) {
     }
 }
 
+async function deleteApi(id){
+    const url = `https://todoo.5xcamp.us/todos/${id}`
+    const headers = {headers: {'Authorization': `${token}`}}
+    try {
+        const response = await axios.delete(url,headers)
+        return response
+    } catch (error) {
+        console.log(error)
+    }  
+}
+
 function mountLiDom() {
     todoData.forEach((item) => {
         let li = createElementLi(item)
