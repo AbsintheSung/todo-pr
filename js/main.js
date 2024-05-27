@@ -53,6 +53,26 @@ async function handleComplete(id) {
         console.log(error)
     }
 }
+async function editApi(id,userInput) {
+    try {
+        const url  =`https://todoo.5xcamp.us/todos/${id}`
+        const data = {
+            "todo": {
+              "content": `${userInput}`
+            }
+          }
+        const headers = {
+            headers: {
+                'Authorization': `${token}`
+            }
+        }
+        const response = await axios.patch(url, data, headers)
+        return response
+
+    } catch (error) {
+        return error.response
+    }
+}
 
 function mountLiDom() {
     todoData.forEach((item) => {
