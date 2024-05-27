@@ -64,13 +64,13 @@ export async function handleDelete(id, fn) {
       });
       return result.value.data
     }
-    // if (result.isConfirmed) {
-    //   Swal.fire({
-    //     title: "Deleted!",
-    //     text: "Your file has been deleted.",
-    //     icon: "success"
-    //   });
-    // }
+    if (result.value.status === 404) {
+      Swal.fire({
+        title: "刪除失敗",
+        text: `${result.value.data.message}`,
+        icon: "error"
+      });
+    }
   });
 }
 

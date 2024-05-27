@@ -153,7 +153,7 @@ async function deleteApi(id) {
         const response = await axios.delete(url, headers)
         return response
     } catch (error) {
-        console.log(error)
+        return error.response
     }
 }
 
