@@ -108,3 +108,12 @@ export function statusAlert(statusTitle, statusIcon) {
     showConfirmButton: false,
   });
 }
+
+export function errorAlert(statusTitle, statusIcon) {
+  Swal.fire({
+    title: `${statusTitle}`,
+    icon: `${statusIcon}`,
+    showConfirmButton: true,
+    confirmButtonText: "確定"
+  });
+}
