@@ -149,38 +149,3 @@ function eventListenerConfig(dom){
 await getData(todoData)
 pushDataInView()
 mountLiDom()
-todoListVIew.forEach((item) => {
-    // const stateBtn = item.querySelector('.list-completed');
-    // const text = item.querySelector('.list-text');
-    // const delBtn = item.querySelector('.delete-item');
-
-    // stateBtn.addEventListener('click', async () => {
-    //     const id = item.getAttribute('data-id');
-    //     const completed_at = await handleComplete(id)
-    //     item.setAttribute('time-completed', completed_at);
-    //     setComplete(item)
-    // });
-
-    // text.addEventListener('click', async (event) => {
-    //     const id = item.getAttribute('data-id');
-    //     const responseValue = await handleEdit(event.target.textContent,id,editApi)
-    //     if(responseValue !=undefined){
-    //         const idIndex = todoData.findIndex((item)=>item.id === id)
-    //         todoData[idIndex].content = responseValue.content
-    //         event.target.textContent = responseValue.content
-    //     }
-    // });
-
-    // delBtn.addEventListener('click', async() => {
-    //     const id = item.getAttribute('data-id');
-    //     const responseValue = await handleDelete(id,deleteApi)
-    //     if(responseValue===undefined){
-    //         return
-    //     }else if(responseValue.message==='已刪除'){
-    //         const idIndex = todoData.findIndex((item)=>item.id === id)
-    //         todoData.splice(idIndex,1);
-    //         todoListVIew.splice(idIndex,1);
-    //         resetDom(todoList)
-    //     }
-    // });
-})
