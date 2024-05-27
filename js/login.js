@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loading, statusAlert } from "./swal"
+import { loading, statusAlert, toast } from "./swal"
 const loginForm = document.querySelector('.login-form');
 const inputEmail = document.querySelector(".login-email");
 const inputPassword = document.querySelector(".login-password");
@@ -10,13 +10,16 @@ const loginWarnView = Array.from(loginWarn)
 
 const fetchUserData = async (userdata) => {
     try {
+        loading('登入中')
         const response = await axios.post("https://todoo.5xcamp.us/users/sign_in", userdata);
         if (response.status === 200) {
             document.cookie = `TokenCode=${response.headers["authorization"]}`
-            window.location.href = '/todo-pr/pages/home'
+            toast('success', '登入成功')
+            // window.location.href = '/todo-pr/pages/home'
         }
     } catch (error) {
         console.error(error.response);
+        statusAlert(error.response.data.message = "登入失敗", 'error')
     }
 }
 

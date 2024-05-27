@@ -74,7 +74,7 @@ export async function handleDelete(id, fn) {
   });
 }
 
-export async function loading(statusText) {
+export function loading(statusText) {
   Swal.fire({
     title: statusText,
     text: "請稍候...",
@@ -83,6 +83,21 @@ export async function loading(statusText) {
       Swal.showLoading();
     }
   });
+}
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 1000,
+});
+export function toast(iconText, titleText) {
+  Toast.fire({
+    icon: iconText,
+    title: titleText,
+
+  });
+
 }
 
 export function statusAlert(statusTitle, statusIcon) {
