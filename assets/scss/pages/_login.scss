@@ -135,6 +135,12 @@
         border-radius: 10px;
         color: $third-color;
         background-color: $secondary-color;
+        border: none;
+    }
+
+    .login-btn:hover {
+        cursor: pointer;
+        color: $primary-color
     }
 
     >.login_link {

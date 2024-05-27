@@ -15,7 +15,7 @@ const fetchUserData = async (userdata) => {
         if (response.status === 200) {
             document.cookie = `TokenCode=${response.headers["authorization"]}`
             toast('success', '登入成功')
-            // window.location.href = '/todo-pr/pages/home'
+            window.location.href = '/todo-pr/pages/home'
         }
     } catch (error) {
         console.error(error.response);
