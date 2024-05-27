@@ -27,20 +27,20 @@ function setComplete(dom) {
 }
 
 //獲取的資料，會先透過其他方式轉成dom元素，並存入todoListView陣列裡，我們再透過此陣列對裡面的dom元素做操作
-function mountLiDom() {
-    todoListVIew.forEach((item) => {
+function mountLiDom(parentElement, listView) {
+    listView.forEach((item) => {
         setComplete(item) //顯示或隱藏框框或是打勾
         fragment.appendChild(item); //透過虛擬dom，先掛載在虛擬dom上面
     })
-    todoList.appendChild(fragment)//一次掛載上去
+    parentElement.appendChild(fragment)//一次掛載上去
 }
 
 //重製畫面，清空網頁畫面( 移除所有的li dom元素 ) 再透過 todoListVIew 重新渲染(掛載) ，
-function resetDom(domfather) {
-    while (domfather.firstChild) {
-        domfather.removeChild(domfather.firstChild)
+function resetDom(parentElement, listView) {
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild)
     }
-    mountLiDom()
+    mountLiDom(parentElement, listView)
 }
 
 //li-dom元素的所有監聽事件
@@ -75,7 +75,7 @@ function eventListenerConfig(dom) {
             const idIndex = todoData.findIndex((item) => item.id === id)
             todoData.splice(idIndex, 1);
             todoListVIew.splice(idIndex, 1);
-            resetDom(todoList)
+            resetDom(todoList, todoListVIew)
         }
     });
 }
@@ -208,20 +208,22 @@ addListBtn.addEventListener('click', async () => {
     eventListenerConfig(li) //對每一個li-dom元素綁定監聽事件
     todoListVIew.unshift(li)
     userInputList.value = ''
-    resetDom(todoList)
+    resetDom(todoList, todoListVIew)
 })
 
 filterBtnView.forEach((item) => {
     item.addEventListener('click', () => {
         const filterId = item.getAttribute('data-filter');
         if (filterId === "全部") {
-
+            resetDom(todoList, todoListVIew)
         }
         if (filterId === "待完成") {
-
+            const notCompleteArray = filterNotComplete()
+            resetDom(todoList, notCompleteArray)
         }
         if (filterId === "已完成") {
-
+            const isCompleteArray = filterIsComplete()
+            resetDom(todoList, isCompleteArray)
         }
     })
 })
@@ -232,7 +234,7 @@ filterBtnView.forEach((item) => {
 async function init() {
     await getData(todoData)
     pushDataInView()
-    mountLiDom()
+    mountLiDom(todoList, todoListVIew)
 }
 
 init()
