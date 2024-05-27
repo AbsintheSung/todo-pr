@@ -1,57 +1,69 @@
-.register-view{
-    height:100vh;
-    @include Medium{
+.register-view {
+    height: 100vh;
+
+    @include Medium {
         display: flex;
         justify-content: space-between;
     }
 }
 
 //header
-.register-header{
+.register-header {
     padding: 48px 0px;
-    >.register-title{
+
+    >.register-title {
         font-size: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap:0px 4px
+        gap: 0px 4px
     }
-    >.register-subtitle{
+
+    >.register-subtitle {
         font-size: 20px;
         margin-top: 16px;
     }
-    >.register-title,.register-subtitle{
+
+    >.register-title,
+    .register-subtitle {
         text-align: center;
         font-weight: 700;
     }
-    >.register-img{
+
+    >.register-img {
         display: none;
     }
-    @include Medium{
+
+    @include Medium {
         width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
-        >.register-title{
+        align-items: center;
+
+        >.register-title {
             margin-bottom: 16px;
         }
-        >.register-subtitle{
+
+        >.register-subtitle {
             display: none;
         }
-        >.register-img{
+
+        >.register-img {
             display: block;
         }
     }
 }
-.title-style{
+
+.title-style {
     position: relative;
     width: 40px;
     height: 40px;
     border: 3px solid $secondary-color;
     transform: rotate(-10deg);
 }
-.title-style::before{
+
+.title-style::before {
     content: "✔";
     position: absolute;
     font-size: 50px;
@@ -60,66 +72,80 @@
 }
 
 //main
-.register-main{
-    >.register-form-title{
+.register-main {
+    >.register-form-title {
         font-family: "Noto Sans TC", sans-serif;
         text-align: center;
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 24px;
     }
-    >.register-form{
-        @include Medium{
+
+    >.register-form {
+        @include Medium {
             width: 100%;
-        } 
+        }
     }
-    @include Medium{
+
+    @include Medium {
         width: 40%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
-    }  
+        align-items: center;
+    }
 }
-.input-style{
+
+.input-style {
     display: flex;
     flex-direction: column;
-    gap:4px 0px;
+    gap: 4px 0px;
     margin-bottom: 16px;
     font-family: "Noto Sans TC", sans-serif;
     font-size: 14px;
     font-weight: 700;
-    >input{
+
+    >input {
         padding: 16px;
         font-size: 16px;
         border: none;
         border-radius: 10px;
     }
-    .register-warn{
-        color:$warn-color;
+
+    .register-warn {
+        color: $warn-color;
     }
 }
 
-.register-button{
+.register-button {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-family: "Noto Sans TC", sans-serif;
     font-weight: 700;
-    >button{
+
+    >.register-btn {
         width: 128px;
         padding: 12px 0px;
         border-radius: 10px;
-        color:$third-color;
+        color: $third-color;
         background-color: $secondary-color;
+        border: none;
     }
-    >.register_link{
+
+    .register-btn:hover {
+        cursor: pointer;
+        color: $primary-color;
+    }
+
+    >.register_link {
         display: block;
         margin-top: 24px;
-        color:$secondary-color ;
+        color: $secondary-color ;
     }
-    >.register_link:hover{
+
+    >.register_link:hover {
         text-decoration: underline;
     }
 }
