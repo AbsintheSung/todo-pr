@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import createElementLi from "./li_module"
-import { handleEdit,handleDelete } from "./swal"
+import { handleEdit,handleDelete,loading,statusAlert } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
 const userInputList = document.querySelector('.home-userinput')
@@ -157,9 +157,36 @@ async function deleteApi(id){
     }  
 }
 
+//新增list 請求
+async function addList(userInput){
+    const url = `https://todoo.5xcamp.us/todos`
+    const data = {
+        "todo": {
+            "content": `${userInput}`
+        }
+    }
+    const headers = {headers: {'Authorization': `${token}`}}
+    loading()
+    try {
+        const response = await axios.post(url,data,headers)
+        if(response.status === 201){
+            statusAlert('新增成功','success')
+            return response.data
+        }
+    } catch (error) {
+        statusAlert('新增失敗','error')
+        console.log(error)
+    }
+}
 
-addListBtn.addEventListener('click',function(){
-    
+
+addListBtn.addEventListener('click',async ()=>{
+    const liData = await addList(userInputList.value)
+    const li = createElementLi({...liData, "completed_at": null})
+    eventListenerConfig(li) //對每一個li-dom元素綁定監聽事件
+    todoListVIew.unshift(li)
+    userInputList.value=''
+    resetDom(todoList)
 })
 
 
