@@ -1,4 +1,5 @@
 import axios from "axios"
+import { loading, statusAlert, toast } from "./swal"
 const registerForm = document.querySelector('.register-form')
 const registerEmail = document.querySelector(".register-email")
 const registerName = document.querySelector(".register-name")
@@ -63,13 +64,16 @@ function verify(errorMessage) {
 async function sendData(data) {
     const url = 'https://todoo.5xcamp.us/users'
     try {
+        loading('註冊中')
         let response = await axios.post(url, data)
         if (response.status === 201) {
-            console.log(response.data, '順便跳轉')
+            toast('success', '註冊成功')
+            window.location.href = '/todo-pr/pages/index'
         }
-
     } catch (error) {
-        console.log(error.response.status, error.response.data)
+        // console.log(error.response.status, error.response.data)
+        const errorMes = error.response.data.message + error.response.data.error[0]
+        statusAlert(errorMes, 'error')
     }
 }
 

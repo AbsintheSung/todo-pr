@@ -19,7 +19,7 @@ const fetchUserData = async (userdata) => {
         }
     } catch (error) {
         console.error(error.response);
-        statusAlert(error.response.data.message = "登入失敗", 'error')
+        statusAlert(error.response.data.message, 'error')
     }
 }
 
