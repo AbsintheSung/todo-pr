@@ -4,6 +4,8 @@ import createElementLi from "./li_module"
 import { handleEdit,handleDelete } from "./swal"
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //獲取存在cookie的token
 const fragment = document.createDocumentFragment()
+const userInputList = document.querySelector('.home-userinput')
+const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
 const todoListVIew = [] //顯示層
 const todoData = []
@@ -155,6 +157,10 @@ async function deleteApi(id){
     }  
 }
 
+
+addListBtn.addEventListener('click',function(){
+    console.log(userInputList.value)
+})
 
 
 //初始化設定
