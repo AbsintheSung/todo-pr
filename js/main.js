@@ -200,7 +200,7 @@ async function deleteApi(id) {
 
 //發送登出API
 async function loginOut() {
-    loading('新增中')
+    loading('登出中')
     const url = `https://todoo.5xcamp.us/users/sign_out`
     const headers = { headers: { 'Authorization': `${token}` } }
     try {
@@ -213,6 +213,26 @@ async function loginOut() {
         // console.log(error)
     }
 }
+
+//測試授權
+const checkToken = async () => {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    try {
+        const response = await axios.get("https://todoo.5xcamp.us/check", {
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.status === 200) {
+            return
+        }
+    } catch (error) {
+        if (error) {
+            window.location.href = '/todo-pr/pages/index'
+        }
+    }
+}
+
 
 //新增list 請求
 async function addList(userInput) {
@@ -276,6 +296,7 @@ filterBtnView.forEach((item) => {
 
 //初始化設定
 async function init() {
+    await checkToken()
     await getData(todoData)
     pushDataInView()
     mountLiDom(todoList, todoListVIew)
