@@ -86,22 +86,32 @@ async function deleteApi(id){
     }  
 }
 
-function mountLiDom() {
+function pushDataInView(){
     todoData.forEach((item) => {
         let li = createElementLi(item)
         todoListVIew.push(li)
     })
+}
+
+function mountLiDom() {
     todoListVIew.forEach((item) => {
         setComplete(item)
         fragment.appendChild(item);
     })
     todoList.appendChild(fragment)
 }
+function resetDom(domfather){
+    while(domfather.firstChild){
+        domfather.removeChild(domfather.firstChild)
+    }
+    mountLiDom()
+}
 
 
 
 
 await getData(todoData)
+pushDataInView()
 mountLiDom()
 todoListVIew.forEach((item) => {
     const stateBtn = item.querySelector('.list-completed');
