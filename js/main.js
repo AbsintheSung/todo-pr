@@ -11,6 +11,8 @@ const todoList = document.querySelector('.todo-list')
 const filterBtn = document.querySelectorAll('.filter-btn')
 const listInfo = document.querySelector('.list-info')
 const userName = document.querySelector(".nav-user")
+const notDataView = document.querySelector('.notData')
+const btnBox = document.querySelector('.filter-button')
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
@@ -80,6 +82,8 @@ function eventListenerConfig(dom) {
             todoData.splice(idIndex, 1);
             todoListVIew.splice(idIndex, 1);
             resetDom(todoList, todoListVIew)
+            listInfoMessage()
+            isDataView()
         }
     });
 }
@@ -124,6 +128,21 @@ function resetFilterBtnStyle() {
 function ininFilterBtn() {
     const Index = filterBtnView.findIndex((dom) => dom.getAttribute('data-filter') === "全部")
     filterBtnView[Index].style.borderColor = 'black'
+}
+
+//判斷是否顯示 無代辦事項畫面
+function isDataView(){
+    if(todoListVIew.length === 0){
+        notDataView.style.display ='block'
+        btnBox.style.display = "none";
+        todoList.style.display ='none';
+        listInfo.style.display = "none"
+    }else{
+        btnBox.style.display = "flex";
+        todoList.style.display ='block';
+        listInfo.style.display = 'block'
+        notDataView.style.display ='none'
+    }
 }
 
 
@@ -272,6 +291,7 @@ addListBtn.addEventListener('click', async () => {
     todoListVIew.unshift(li)
     userInputList.value = ''
     resetDom(todoList, todoListVIew)
+    isDataView()
 })
 userLoginOut.addEventListener('click', async () => {
     await loginOut()
@@ -309,6 +329,7 @@ async function init() {
     pushDataInView()
     mountLiDom(todoList, todoListVIew)
     listInfoMessage()
+    isDataView()
     ininFilterBtn()
 }
 

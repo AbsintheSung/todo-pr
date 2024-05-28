@@ -223,3 +223,18 @@
     background-color: #FFFFFF;
     border-radius: 0px 0px 10px 10px;
 }
+
+
+
+//無代辦事項
+.notData{
+    padding: 60px 0px;
+    text-align: center;
+    >h2{
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    >img{
+        width: 80%;
+    }
+}
