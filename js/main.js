@@ -208,6 +208,7 @@ async function loginOut() {
         const response = await axios.delete(url, headers)
         if (response.status === 200) {
             toast('success', '登出成功')
+            sessionStorage.removeItem(`nickname${token}`);
             window.location.href = '/todo-pr/pages/index'
         }
     } catch (error) {
@@ -225,6 +226,8 @@ const checkToken = async () => {
             }
         });
         if (response.status === 200) {
+            const storedNickname = sessionStorage.getItem(`nickname${token}`);
+            userName.textContent = `${storedNickname}的代辦`
             return
         }
     } catch (error) {
