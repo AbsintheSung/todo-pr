@@ -10,6 +10,7 @@ const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
 const filterBtn = document.querySelectorAll('.filter-btn')
 const listInfo = document.querySelector('.list-info')
+const userName = document.querySelector(".nav-user")
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
