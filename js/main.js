@@ -204,9 +204,9 @@ async function loginOut() {
     loading('登出中')
     const url = `https://todoo.5xcamp.us/users/sign_out`
     const headers = { headers: { 'Authorization': `${token}` } }
-    const token  = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     try {
         const response = await axios.delete(url, headers)
+        console.log(response)
         if (response.status === 200) {
             toast('success', '登出成功')
             sessionStorage.removeItem(`nickname${token}`);
