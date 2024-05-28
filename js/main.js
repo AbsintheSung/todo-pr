@@ -259,8 +259,10 @@ async function addList(userInput) {
 
 addListBtn.addEventListener('click', async () => {
     const liData = await addList(userInputList.value)
-    const li = createElementLi({ ...liData, "completed_at": null })
+    const data = { ...liData, "completed_at": null }
+    const li = createElementLi(data)
     eventListenerConfig(li) //對每一個li-dom元素綁定監聽事件
+    todoData.unshift(data)
     todoListVIew.unshift(li)
     userInputList.value = ''
     resetDom(todoList, todoListVIew)
@@ -300,6 +302,7 @@ async function init() {
     await getData(todoData)
     pushDataInView()
     mountLiDom(todoList, todoListVIew)
+    listInfoMessage()
     ininFilterBtn()
 }
 
