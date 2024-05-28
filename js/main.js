@@ -10,6 +10,7 @@ const addListBtn = document.querySelector('.add-listItem')
 const todoList = document.querySelector('.todo-list')
 const filterBtn = document.querySelectorAll('.filter-btn')
 const listInfo = document.querySelector('.list-info')
+const userName = document.querySelector(".nav-user")
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
@@ -203,10 +204,13 @@ async function loginOut() {
     loading('登出中')
     const url = `https://todoo.5xcamp.us/users/sign_out`
     const headers = { headers: { 'Authorization': `${token}` } }
+    const token  = document.cookie.replace(/(?:(?:^|.*;\s*)TokenCode\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     try {
         const response = await axios.delete(url, headers)
         if (response.status === 200) {
             toast('success', '登出成功')
+            sessionStorage.removeItem(`nickname${token}`);
+            document.cookie = `TokenCode=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
             window.location.href = '/todo-pr/pages/index'
         }
     } catch (error) {
@@ -224,6 +228,8 @@ const checkToken = async () => {
             }
         });
         if (response.status === 200) {
+            const storedNickname = sessionStorage.getItem(`nickname${token}`);
+            userName.textContent = `${storedNickname}的代辦`
             return
         }
     } catch (error) {
