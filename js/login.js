@@ -14,6 +14,7 @@ const fetchUserData = async (userdata) => {
         const response = await axios.post("https://todoo.5xcamp.us/users/sign_in", userdata);
         if (response.status === 200) {
             document.cookie = `TokenCode=${response.headers["authorization"]}`
+            sessionStorage.setItem( `nickname${response.headers["authorization"]}`, response.data.nickname);
             toast('success', '登入成功')
             window.location.href = '/todo-pr/pages/home'
         }
