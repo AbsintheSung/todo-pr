@@ -131,17 +131,17 @@ function ininFilterBtn() {
 }
 
 //判斷是否顯示 無代辦事項畫面
-function isDataView(){
-    if(todoListVIew.length === 0){
-        notDataView.style.display ='block'
+function isDataView() {
+    if (todoListVIew.length === 0) {
+        notDataView.style.display = 'block'
         btnBox.style.display = "none";
-        todoList.style.display ='none';
+        todoList.style.display = 'none';
         listInfo.style.display = "none"
-    }else{
+    } else {
         btnBox.style.display = "flex";
-        todoList.style.display ='block';
+        todoList.style.display = 'block';
         listInfo.style.display = 'block'
-        notDataView.style.display ='none'
+        notDataView.style.display = 'none'
     }
 }
 
@@ -230,7 +230,7 @@ async function loginOut() {
             toast('success', '登出成功')
             sessionStorage.removeItem(`nickname${token}`);
             document.cookie = `TokenCode=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            window.location.href = '/todo-pr/pages/index'
+            window.location.href = './index'
         }
     } catch (error) {
         // console.log(error)
@@ -253,7 +253,7 @@ const checkToken = async () => {
         }
     } catch (error) {
         if (error) {
-            window.location.href = '/todo-pr/pages/index'
+            window.location.href = './index'
         }
     }
 }

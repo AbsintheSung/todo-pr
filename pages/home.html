@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-    />
-    <title>代辦事項</title>
-  </head>
-  <body>
-    <div class="container-fluid home-primary-bg">
-      <div class="container home-view">
-        <header class="home-header">
-          <h1 class="home-title">
-            <div class="home-title-style"></div>
-            ONLINE TODO LIST
-          </h1>
-          <ul class="navlist">
-            <li class="nav-user">xxx的代辦</li>
-            <li class="nav-signout">
-              <button class="login-out">登出</button>
-            </li>
-          </ul>
-        </header>
-        <main class="home-main">
-          <div class="main-input">
-            <input type="text" class="home-userinput" />
-            <button class="add-listItem">
-              <i class="fa-solid fa-square-plus"></i>
-            </button>
-          </div>
-          <div class="notData">
-            <h2>目前無任何代辦事項</h2>
-            <img src="/imgs/img2.png" />
-          </div>
-          <div class="filter-button">
-            <button class="filter-btn" data-filter="全部">全部</button>
-            <button class="filter-btn" data-filter="待完成">待完成</button>
-            <button class="filter-btn" data-filter="已完成">已完成</button>
-          </div>
-          <ul class="todo-list">
-            <!-- <li class="todo-list__item">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+  <title>代辦事項</title>
+</head>
+
+<body>
+  <div class="container-fluid home-primary-bg">
+    <div class="container home-view">
+      <header class="home-header">
+        <h1 class="home-title">
+          <div class="home-title-style"></div>
+          ONLINE TODO LIST
+        </h1>
+        <ul class="navlist">
+          <li class="nav-user">xxx的代辦</li>
+          <li class="nav-signout">
+            <button class="login-out">登出</button>
+          </li>
+        </ul>
+      </header>
+      <main class="home-main">
+        <div class="main-input">
+          <input type="text" class="home-userinput" />
+          <button class="add-listItem">
+            <i class="fa-solid fa-square-plus"></i>
+          </button>
+        </div>
+        <div class="notData">
+          <h2>目前無任何代辦事項</h2>
+          <img src="/imgs/img2.png" />
+        </div>
+        <div class="filter-button">
+          <button class="filter-btn" data-filter="全部">全部</button>
+          <button class="filter-btn" data-filter="待完成">待完成</button>
+          <button class="filter-btn" data-filter="已完成">已完成</button>
+        </div>
+        <ul class="todo-list">
+          <!-- <li class="todo-list__item">
               <div class="list-content">
                 <button class="list-completed">
                   <span class="not-check">
@@ -90,16 +89,17 @@
                 <i class="fa-solid fa-x"></i>
               </button>
             </li> -->
-          </ul>
-          <div class="main-footer">
-            <p class="list-info">5個待完成</p>
-          </div>
-        </main>
-      </div>
+        </ul>
+        <div class="main-footer">
+          <p class="list-info">5個待完成</p>
+        </div>
+      </main>
     </div>
+  </div>
 
-    <script type="module" src="/js/style.js"></script>
-    <script type="module" src="/js/swal.js"></script>
-    <script type="module" src="/js/main.js"></script>
-  </body>
+  <script type="module" src="../js/style.js"></script>
+  <script type="module" src="../js/swal.js"></script>
+  <script type="module" src="../js/main.js"></script>
+</body>
+
 </html>
