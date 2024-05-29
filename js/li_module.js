@@ -1,4 +1,3 @@
-const fragment = document.createDocumentFragment()
 //建立 i 標籤
 function createElement_i(className) {
     const i = document.createElement('i')
@@ -58,6 +57,7 @@ function createElementDelBtn() {
 
 //建立li
 export default function createElementLi(obj) {
+    const fragment = document.createDocumentFragment()
     const li = document.createElement('li');
     const li_content = createElementListContent(obj.content);
     const del_btn = createElementDelBtn();
