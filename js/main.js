@@ -13,6 +13,7 @@ const listInfo = document.querySelector('.list-info')
 const userName = document.querySelector(".nav-user")
 const notDataView = document.querySelector('.notData')
 const btnBox = document.querySelector('.filter-button')
+const mainFooter = document.querySelector('.main-footer')
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
@@ -133,11 +134,13 @@ function isDataView() {
         btnBox.style.display = "none";
         todoList.style.display = 'none';
         listInfo.style.display = "none"
+        mainFooter.style.display = "none"
     } else {
         btnBox.style.display = "flex";
         todoList.style.display = 'block';
         listInfo.style.display = 'block'
         notDataView.style.display = 'none'
+        mainFooter.style.display = "block"
     }
 }
 
