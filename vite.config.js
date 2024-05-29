@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
-import liveReload from 'vite-plugin-live-reload';
+import { defineConfig } from 'vite';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { glob } from 'glob';
+
+import liveReload from 'vite-plugin-live-reload';
 
 function moveOutputPlugin() {
     return {
@@ -12,9 +13,8 @@ function moveOutputPlugin() {
         async generateBundle(options, bundle) {
             for (const fileName in bundle) {
                 if (fileName.startsWith('pages/')) {
-                    const newFileName = fileName.slice('pages/'.length).replace(/\.html$/, '');
-                    bundle[newFileName] = bundle[fileName];
-                    delete bundle[fileName];
+                    const newFileName = fileName.slice('pages/'.length);
+                    bundle[fileName].fileName = newFileName;
                 }
             }
         },
@@ -22,28 +22,28 @@ function moveOutputPlugin() {
 }
 
 export default defineConfig({
+    // base 的寫法：
+    // base: '/Repository 的名稱/'
     base: '/todo-pr/',
     plugins: [
         liveReload(['./pages/**/*.html']),
         moveOutputPlugin(),
     ],
     server: {
-        // open: 'index.html',
-        open: 'pages/index',
-        fs: {
-            strict: true, // 限制訪問路徑
-        },
+        // 啟動 server 時預設開啟的頁面
+        open: 'pages/index.html',
     },
     build: {
         rollupOptions: {
             input: Object.fromEntries(
-                glob.sync('pages/**/*.html').map((file) => [
-                    path.relative('pages', file.slice(0, file.length - path.extname(file).length)),
-                    fileURLToPath(new URL(file, import.meta.url)),
-                ])
+                glob
+                    .sync('pages/**/*.html')
+                    .map((file) => [
+                        path.relative('pages', file.slice(0, file.length - path.extname(file).length)),
+                        fileURLToPath(new URL(file, import.meta.url)),
+                    ])
             ),
         },
         outDir: 'dist',
     },
-
-})
+});
