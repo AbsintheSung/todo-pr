@@ -19,16 +19,12 @@ const todoData = []
 
 //根據 dom 上面的 自定義屬性(time-completed)的值，來顯示 框框或是打勾
 function setComplete(dom) {
+    const isComplete = dom.getAttribute('time-completed') !== 'null'
     const completedSpan = dom.querySelector('.is-check');
     const notCompletedSpan = dom.querySelector('.not-check');
 
-    if (dom.getAttribute('time-completed') !== 'null') {
-        completedSpan.style.display = 'inline-block';
-        notCompletedSpan.style.display = 'none';
-    } else {
-        completedSpan.style.display = 'none';
-        notCompletedSpan.style.display = 'inline-block';
-    }
+    completedSpan.style.display = isComplete ? 'inline-block' : 'none'
+    notCompletedSpan.style.display = isComplete ? 'none' : 'inline-block'
 }
 
 //獲取的資料，會先透過其他方式轉成dom元素，並存入todoListView陣列裡，我們再透過此陣列對裡面的dom元素做操作
