@@ -13,22 +13,19 @@ const listInfo = document.querySelector('.list-info')
 const userName = document.querySelector(".nav-user")
 const notDataView = document.querySelector('.notData')
 const btnBox = document.querySelector('.filter-button')
+const mainFooter = document.querySelector('.main-footer')
 const filterBtnView = Array.from(filterBtn)
 const todoListVIew = [] //顯示層
 const todoData = []
 
 //根據 dom 上面的 自定義屬性(time-completed)的值，來顯示 框框或是打勾
 function setComplete(dom) {
+    const isComplete = dom.getAttribute('time-completed') !== 'null'
     const completedSpan = dom.querySelector('.is-check');
     const notCompletedSpan = dom.querySelector('.not-check');
 
-    if (dom.getAttribute('time-completed') !== 'null') {
-        completedSpan.style.display = 'inline-block';
-        notCompletedSpan.style.display = 'none';
-    } else {
-        completedSpan.style.display = 'none';
-        notCompletedSpan.style.display = 'inline-block';
-    }
+    completedSpan.style.display = isComplete ? 'inline-block' : 'none'
+    notCompletedSpan.style.display = isComplete ? 'none' : 'inline-block'
 }
 
 //獲取的資料，會先透過其他方式轉成dom元素，並存入todoListView陣列裡，我們再透過此陣列對裡面的dom元素做操作
@@ -137,11 +134,13 @@ function isDataView() {
         btnBox.style.display = "none";
         todoList.style.display = 'none';
         listInfo.style.display = "none"
+        mainFooter.style.display = "none"
     } else {
         btnBox.style.display = "flex";
         todoList.style.display = 'block';
         listInfo.style.display = 'block'
         notDataView.style.display = 'none'
+        mainFooter.style.display = "block"
     }
 }
 
