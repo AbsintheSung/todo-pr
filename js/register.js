@@ -68,7 +68,7 @@ async function sendData(data) {
         let response = await axios.post(url, data)
         if (response.status === 201) {
             toast('success', '註冊成功')
-            window.location.href = '/todo-pr/pages/index'
+            window.location.href = './index.html'
         }
     } catch (error) {
         // console.log(error.response.status, error.response.data)
